@@ -1,60 +1,63 @@
-# synent-task8--web_scraper-ankit
+# Robu Product Scraper
 
-# LCSC Table Downloader
-
-A Python automation script that uses Playwright to download CSV tables from multiple pages on the LCSC website.
+A Python web scraping script that extracts product information from Robu product category pages and saves the data to CSV files.
 
 ## Features
 
-- Automates CSV downloads from LCSC product listings
-- Saves each page as a separate CSV file
-- Supports downloading multiple pages automatically
-- Allows manual filter and page size selection before starting
+- Scrapes product name, SKU, price, and stock status
+- Supports multiple product subcategories
+- Automatically navigates through paginated results
+- Saves data incrementally to prevent data loss
+- Exports results as CSV files
 
 ## Requirements
 
 - Python 3.x
-- Playwright
+- Required libraries:
+  - cloudscraper
+  - beautifulsoup4
+  - pandas
 
-Install Playwright:
+Install the dependencies:
 
 ```bash
-pip install playwright
-playwright install
+pip install cloudscraper beautifulsoup4 pandas
 ```
 
 ## How to Run
 
-1. Update the `URL` and `TOTAL_PAGES` variables if needed.
-2. Run the script:
+1. Update the `base_urls` dictionary with the desired product categories.
+2. Set the starting page number if required.
+3. Run the script:
 
 ```bash
-python lcsc.py
+python robu.py
 ```
-
-3. The browser will open.
-4. Manually configure the desired filters and page size.
-5. Press **Enter** in the terminal to begin downloading.
-6. The CSV files will be saved in the `lcsc_downloads` folder.
 
 ## Output
 
-Downloaded files are saved as:
+The scraped data is saved as CSV files in the current directory.
+
+Example:
 
 ```
-lcsc_downloads/
-├── page_001.csv
-├── page_002.csv
-├── page_003.csv
-└── ...
+robu_film.csv
 ```
+
+Each CSV contains the following columns:
+
+- Subcategory
+- Product Name
+- SKU
+- Price
+- In Stock
 
 ## Notes
 
-- The browser runs in non-headless mode to allow manual setup.
-- Ensure your internet connection remains active during the download process.
-- Adjust `TOTAL_PAGES` to match the number of pages you want to download.
+- The script pauses briefly between page requests to reduce server load.
+- Data is written to the CSV file every 10 pages and again after the final page.
+- If an output file already exists, it is replaced with a fresh file before scraping begins.
 
 ## Author
 
-Created as a Playwright automation project for downloading product table data from LCSC.
+Created as a Python web scraping project for collecting product information from Robu product listings.
